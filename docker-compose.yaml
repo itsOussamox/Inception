@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  # nginx:
+  #   build: nginx/
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #   volumes:
+  #     - ./default:/etc/nginx/conf.d/default.conf
+  #   links:
+  #     - mariadb
+  # mariadb:
+  #   build: database/
+  #   container_name: mariadb_c
+  #   ports:
+  #     - "3306"
+  #   networks:
+  #     - deez
+
+  wordpress:
+    build: ./wordpress/
+    # depends_on:
+    #   - mariadb
+    # ports: 
+    #   - "9090"
+    # networks:
+    #   - deez
+    
+# networks:
+#   deez: {"driver": "bridge"}
