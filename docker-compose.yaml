@@ -1,31 +1,55 @@
 version: '3'
 
 services:
-  # nginx:
-  #   build: nginx/
-  #   ports:
-  #     - "80:80"
-  #     - "443:443"
-  #   volumes:
-  #     - ./default:/etc/nginx/conf.d/default.conf
-  #   links:
-  #     - mariadb
-  # mariadb:
-  #   build: database/
-  #   container_name: mariadb_c
-  #   ports:
-  #     - "3306"
-  #   networks:
-  #     - deez
-
   wordpress:
     build: ./wordpress/
-    # depends_on:
-    #   - mariadb
-    # ports: 
-    #   - "9090"
-    # networks:
-    #   - deez
+    depends_on:
+      - mariadb
+    container_name: wordpress
+    ports: 
+      - 9000:9000
+    volumes:
+      - wp:/var/www/html
+    networks:
+      - deez
+      - mynet
     
-# networks:
-#   deez: {"driver": "bridge"}
+  nginx:
+    build: ./nginx/
+    container_name: nginx
+    depends_on:
+      - wordpress
+    ports:
+      - 443:443
+    volumes:
+      - wp:/var/www/html
+    networks:
+      - mynet
+    links:
+      - mariadb
+  mariadb:
+    build: database/
+    container_name: mariadb
+    ports:
+      - 3306:3306
+    volumes:
+      - db:/var/lib/mysql
+    networks:
+      - deez
+volumes:
+  wp:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /Users/obouadel/Desktop/Inception/wp_volume
+  db:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /Users/obouadel/Desktop/Inception/db_volume
+
+networks:
+  mynet:
+  deez: {"driver": "bridge"}

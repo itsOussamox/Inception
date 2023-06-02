@@ -6,19 +6,23 @@ MYSQL_ROOT_PASSWORD="rootobouadel"
 MYSQL_PASSWORD="obo2001"
 MYSQL_DATABASE="obobase"
 MYSQL_BASE="mariadb"
-# Start the MariaDB server
-service mysql start
-
 # Create a new database
+service mysql start
 # echo "Database cd"
-mysql -u root -e "CREATE DATABASE IF NOT EXISTS ${MYSQL_DATABASE}"
+mysql -e "CREATE DATABASE IF NOT EXISTS ${MYSQL_DATABASE};"
 
-mysql -u root -e "FLUSH PRIVILEGES"
 # Create a new administrative user
-mysql -u root -e "CREATE USER '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}'"
-mysql -u root -e "GRANT ALL PRIVILEGES ON *.* TO '${MYSQL_USER}'@'%' WITH GRANT OPTION"
-mysql -u root -e "FLUSH PRIVILEGES"
-echo "Database created"
-service mysql stop
-echo "Database created"
-mysqld
+mysql -e "CREATE USER IF NOT EXISTS'${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';"
+echo "Da"
+mysql -e "GRANT ALL PRIVILEGES ON ${MYSQL_DATABASE}.* TO '${MYSQL_USER}'@'%';"
+mysql -e "GRANT ALL PRIVILEGES ON *.* TO '$MYSQL_USER'@'%';"
+echo "ta"
+mysql -e "FLUSH PRIVILEGES;"
+mysql -e "alter user 'root'@'localhost' identified by '$MYSQL_ROOT_PASSWORD';"
+echo "ba"
+mysql -e "FLUSH PRIVILEGES;"
+echo "se"
+echo $(cat /var/run/mysqld/mysqld.pid)
+kill `cat /var/run/mysqld/mysqld.pid`
+echo "created"
+exec "$@"

@@ -6,14 +6,15 @@
 #    By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/06 02:46:59 by obouadel          #+#    #+#              #
-#    Updated: 2023/04/16 22:09:42 by obouadel         ###   ########.fr        #
+#    Updated: 2023/05/31 13:58:07 by obouadel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = wordpress
 CONTAINER_NAME = wordpress_container
+VOLUME_NAME = wordpress_volume
 
-all: build
+all: build run
 
 build:
 	- docker build -t $(NAME) .
@@ -21,10 +22,8 @@ build:
 exec:
 	- docker exec -it $(CONTAINER_NAME) bash
 	
-it:
-	- docker run -it --name $(CONTAINER_NAME) -p 80:80 -p 443:443 $(NAME) bash
 run:
-	- docker run --name $(CONTAINER_NAME) -p 80:80 -p 443:443 $(NAME)
+	- docker run --name $(CONTAINER_NAME) -p 443:443 -v $(VOLUME_NAME):/var/www/html $(NAME)
 
 clean:
 	- docker stop $(CONTAINER_NAME)

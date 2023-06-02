@@ -6,7 +6,7 @@
 #    By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/06 02:53:14 by obouadel          #+#    #+#              #
-#    Updated: 2023/04/11 01:11:18 by obouadel         ###   ########.fr        #
+#    Updated: 2023/05/29 14:50:47 by obouadel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,10 @@ build:
 	- docker build -t $(NAME) .
 	
 run:
-	- docker run -it --name $(CONTAINER_NAME) $(NAME)
+	- docker run -it -d --name $(CONTAINER_NAME) $(NAME)
+
+exec:
+	- docker exec -it $(CONTAINER_NAME) bash
 
 clean:
 	- docker rm $(CONTAINER_NAME)
