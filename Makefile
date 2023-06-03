@@ -6,20 +6,20 @@
 #    By: obouadel <obouadel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/01 19:54:24 by obouadel          #+#    #+#              #
-#    Updated: 2023/06/03 13:06:00 by obouadel         ###   ########.fr        #
+#    Updated: 2023/06/03 13:07:58 by obouadel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 all : build
 
 build :
-	./srcs/docker-compose up
+	docker-compose -f ./srcs/docker-compose.yml  up
 	
 clean :
-	./srcs/docker-compose down
+	docker-compose -f ./srcs/docker-compose.yml  down
 	
 fclean : clean purge
-	./srcs/docker-compose rm -f
+	docker-compose -f ./srcs/docker-compose.yml  rm -f
 
 cleanvol:
 	cd /Users/obouadel/Desktop/Inception/srcs/wp_volume && rm -rf *
