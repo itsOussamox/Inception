@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
 echo "Wordpress is installing"
-MYSQL_USER="obouadel"
-MYSQL_ROOT_PASSWORD="rootobouadel"
-MYSQL_PASSWORD="obo2001"
-MYSQL_DATABASE="obobase"
-MYSQL_BASE="mariadb" 
 apt install wget -y
 apt install php7.3 -y
 apt install php7.3-mysql -y
@@ -25,8 +20,8 @@ if [ ! -f /usr/share/nginx/html/wp-config.php ]; then
     sed -i "s/username_here/${MYSQL_USER}/g" wp-config.php
     sed -i "s/password_here/${MYSQL_PASSWORD}/g" wp-config.php
     sed -i "s/localhost/${MYSQL_BASE}/g" wp-config.php
-    wp core install --allow-root --url=example.com --title=obobase --admin_user=obouadel --admin_password=obo2001 --admin_email=obobase@gmail.com
-    wp user create --allow-root osx obouadel@gmail.com --role=author --user_pass=obosuper 
+    wp core install --allow-root --url=$DOMAIN_NAME --title=$MYSQL_DATABASE --admin_user=$MYSQL_USER --admin_password=$MYSQL_PASSWORD --admin_email=$MYSQL_MAIL
+    wp user create --allow-root $WORDPRESS_USER $WORDPRESS_EMAIL --role=author --user_pass=$WORDPRESS_PASSWORD 
     echo "Wordpress is installed v2"
 else
     echo "Wordpress is already installed"

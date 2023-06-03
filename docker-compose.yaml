@@ -7,9 +7,11 @@ services:
       - mariadb
     container_name: wordpress
     ports: 
-      - 9000:9000
+      - 9000
     volumes:
       - wp:/var/www/html
+    env_file:
+      - .env
     networks:
       - deez
       - mynet
@@ -31,7 +33,9 @@ services:
     build: database/
     container_name: mariadb
     ports:
-      - 3306:3306
+      - 3306
+    env_file:
+      - .env
     volumes:
       - db:/var/lib/mysql
     networks:
