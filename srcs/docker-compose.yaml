@@ -2,7 +2,7 @@ version: '3'
 
 services:
   wordpress:
-    build: srcs/requirements/wordpress
+    build: requirements/wordpress
     depends_on:
       - mariadb
     container_name: wordpress
@@ -17,7 +17,7 @@ services:
       - mynet
     
   nginx:
-    build: srcs/requirements/nginx
+    build: requirements/nginx
     container_name: nginx
     depends_on:
       - wordpress
@@ -30,7 +30,7 @@ services:
     links:
       - mariadb
   mariadb:
-    build: srcs/requirements/database
+    build: requirements/database
     container_name: mariadb
     ports:
       - 3306
@@ -46,13 +46,13 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /Users/obouadel/Desktop/Inception/srcs/requirements/wp_volume
+      device: /home/obouadel/data/wp_volume
   db:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /Users/obouadel/Desktop/Inception/srcs/requirements/db_volume
+      device: /home/obouadel/data/db_volume
 
 networks:
   mynet:
