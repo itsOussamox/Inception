@@ -22,7 +22,7 @@ if [ ! -f /usr/share/nginx/html/wp-config.php ]; then
     sed -i "s/localhost/${MYSQL_BASE}/g" wp-config.php
     wp core install --allow-root --url=$DOMAIN_NAME --title=$MYSQL_DATABASE --admin_user=$MYSQL_USER --admin_password=$MYSQL_PASSWORD --admin_email=$MYSQL_MAIL
     wp user create --allow-root $WORDPRESS_USER $WORDPRESS_EMAIL --role=author --user_pass=$WORDPRESS_PASSWORD 
-    echo "Wordpress is installed v2"
+    echo "Wordpress is installed"
 else
     echo "Wordpress is already installed"
 fi
