@@ -2,7 +2,7 @@ version: '3'
 
 services:
   wordpress:
-    build: ./wordpress/
+    build: srcs/requirements/wordpress
     depends_on:
       - mariadb
     container_name: wordpress
@@ -17,7 +17,7 @@ services:
       - mynet
     
   nginx:
-    build: ./nginx/
+    build: srcs/requirements/nginx
     container_name: nginx
     depends_on:
       - wordpress
@@ -30,7 +30,7 @@ services:
     links:
       - mariadb
   mariadb:
-    build: database/
+    build: srcs/requirements/database
     container_name: mariadb
     ports:
       - 3306
