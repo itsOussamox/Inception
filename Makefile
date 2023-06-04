@@ -22,8 +22,8 @@ fclean : clean purge
 	docker-compose -f srcs/docker-compose.yaml rm -f
 
 cleanvol:
-	cd /Users/obouadel/Desktop/Inception/srcs/wp_volume && rm -rf *
-	cd /Users/obouadel/Desktop/Inception/srcs/db_volume && rm -rf *
+	cd /home/obouadel/data//wp_volume && rm -rf *
+	cd /home/obouadel/data//db_volume && rm -rf *
 purge :
 	docker rm wordpress nginx mariadb -f
 	docker rmi inception-nginx inception-mariadb inception-wordpress -f
