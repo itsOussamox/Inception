@@ -13,7 +13,7 @@
 all : build
 
 build :
-	docker-compose -f srcs/docker-compose.yaml up
+	docker-compose -f srcs/docker-compose.yaml up -d
 	
 clean :
 	docker-compose -f srcs/docker-compose.yaml down
